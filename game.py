@@ -1,26 +1,34 @@
 import random
 
-# Bigger list of words
-words = [
-    "python", "developer", "computer", "programming", "keyboard",
-    "monitor", "mouse", "internet", "software", "hardware",
-    "database", "algorithm", "function", "variable", "debugging",
-    "compiler", "network", "encryption", "artificial", "intelligence"
-]
 
-# Pick a random word
-word = random.choice(words)
+def play_round():
+    words = [
+        "python", "developer", "computer", "programming", "keyboard",
+        "monitor", "mouse", "internet", "software", "hardware",
+        "database", "algorithm", "function", "variable", "debugging",
+        "compiler", "network", "encryption", "artificial", "intelligence"
+    ]
 
-# Shuffle the letters
-shuffled = "".join(random.sample(word, len(word)))
 
-# Ask the user to unscramble it
-print(f"🔀 Unscramble this word: {shuffled}")
+    word = random.choice(words)
+    shuffled = "".join(random.sample(word, len(word)))
 
-guess = input("Your guess: ")
+    print(f"🔀 Unscramble this word: {shuffled}")
 
-# Check if the guess is correct
-if guess.lower() == word:
-    print("🎉 Correct! You unscrambled it!")
-else:
-    print(f"❌ Wrong! The correct word was {word}.")
+    attempts=0
+    while True:
+        guess = input("Your guess: ").lower()
+        attempts += 1
+
+        if guess.lower() == word:
+            print("🎉 Correct! You got it in {attempts} attempts.")
+            return attempts
+        else:
+            print(f"❌ Wrong! Try again.")
+def play_game():
+    rounds = int(input("How many rounds do you want to play? ")
+    score = 0
+    for _ in range(rounds):
+        attempts = play_round()
+        score += max(10 - attempts, 1)
+    print(f"\n🏆 Game Over! Your final score: {score}")
